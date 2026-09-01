@@ -69,7 +69,7 @@ def _find_recognition_model(model_dir: Path) -> Optional[Path]:
     """
     import onnxruntime as ort
 
-    onnx_files = list(model_dir.glob("*.onnx"))
+    onnx_files = list(model_dir.rglob("*.onnx"))
     if not onnx_files:
         return None
 
@@ -233,7 +233,7 @@ def _ensure_recognition_model_pack(model_name: str, download_model_pack) -> Path
         return rec_model_path
 
     available_files = (
-        [f.name for f in model_dir.glob("*.onnx")] if model_dir.exists() else []
+        [f.name for f in model_dir.rglob("*.onnx")] if model_dir.exists() else []
     )
     logger.error(f"No valid recognition model found in {model_dir}")
     logger.error(f"Available ONNX files: {available_files}")
