@@ -28,6 +28,8 @@ MODEL_MAP = {
     # LAION CLIP models -> MLX
     "ViT-B-32__laion2b-s34b-b79k": "mlx-community/clip-vit-base-patch32-laion2b",
     "ViT-B-32__laion2b_s34b_b79k": "mlx-community/clip-vit-base-patch32-laion2b",
+    # Apple DFN5B CLIP -> MLX
+    "ViT-H-14-378-quickgelu__dfn5b": None,  # No prebuilt MLX port — auto-converted on first use
     # SigLIP models -> None (use open_clip fallback)
     "ViT-B-16-SigLIP__webli": None,
     "ViT-B-16-SigLIP2__webli": None,
@@ -58,6 +60,9 @@ HF_REPO_MAP = {
     "ViT-B-16__openai": "openai/clip-vit-base-patch16",
     "ViT-B-32__laion2b-s34b-b79k": "laion/CLIP-ViT-B-32-laion2b-s34b-b79k",
     "ViT-B-32__laion2b_s34b_b79k": "laion/CLIP-ViT-B-32-laion2b-s34b-b79k",
+    # Apple publishes this one with a transformers-native CLIPModel checkpoint
+    # (pytorch_model.bin + config.json) alongside its open_clip checkpoint.
+    "ViT-H-14-378-quickgelu__dfn5b": "apple/DFN5B-CLIP-ViT-H-14-378",
 }
 
 # Directory where auto-converted MLX models are cached.

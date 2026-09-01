@@ -69,7 +69,7 @@ What this service controls is which models are *supported* and how each one is l
 The model name Immich sends is resolved through three lookup tables in `src/models/clip.py` (`MODEL_MAP`, `HF_REPO_MAP`, `OPENCLIP_MAP`), and a given name can end up loaded one of four ways:
 
 1. **Prebuilt MLX** — a ready-made `mlx-community` port exists; loaded directly via MLX (fastest path, no conversion).
-2. **Converted MLX** — no prebuilt port, but a HuggingFace source is known. Converted to MLX on **first use** and cached under `~/.cache/immich-ml-metal/mlx-models/<name>` (~1–2GB download, a few minutes — happens once per model per machine, so the first request after selecting such a model is slow).
+2. **Converted MLX** — no prebuilt port, but a HuggingFace source is known. Converted to MLX on **first use** and cached under `~/.cache/immich-ml-metal/mlx-models/<name>` (~1–2GB download for base/large models, up to ~7GB for huge ones like ViT-H-14; a few minutes — happens once per model per machine, so the first request after selecting such a model is slow).
 3. **open_clip fallback** — no MLX path at all (e.g. SigLIP); runs through open_clip on MPS instead. Works, but slower than MLX.
 4. **Default** — an unrecognized name silently falls back to `ViT-B-32` (prebuilt MLX).
 
@@ -82,6 +82,7 @@ Note also: if `mlx_clip` can't be imported for any reason, **everything** routes
 | `ViT-B-32__laion2b-s34b-b79k` | Prebuilt MLX |
 | `ViT-B-32__laion2b_s34b_b79k` | Prebuilt MLX (alias of the above) |
 | `ViT-L-14__openai` | Converted MLX on first use |
+| `ViT-H-14-378-quickgelu__dfn5b` | Converted MLX on first use (~7GB download, ~4GB cached) |
 | `ViT-B-16-SigLIP__webli` | open_clip fallback |
 | `ViT-B-16-SigLIP2__webli` | open_clip fallback |
 | `ViT-L-16-SigLIP2-256__webli` | open_clip fallback |
